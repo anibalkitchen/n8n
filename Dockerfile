@@ -1,6 +1,5 @@
 FROM n8nio/n8n:latest
 
-# Cambiar a root para instalar paquetes
 USER root
 
 # Instalar Python y dependencias
@@ -11,15 +10,14 @@ RUN apk add --no-cache \
     libxslt-dev \
     zlib-dev
 
-# Instalar music21 y dependencias
-RUN pip3 install --no-cache-dir \
+# Instalar music21 y dependencias con flag de sistema
+RUN pip3 install --no-cache-dir --break-system-packages \
     music21 \
     numpy \
     matplotlib \
     lxml \
     pretty_midi
 
-# Volver al usuario original (n8n usa 'node')
 USER node
 
 # Verificación final
