@@ -1,6 +1,9 @@
 FROM n8nio/n8n:latest
 
-# Instalar Python y dependencias con apk
+# Cambiar a root para instalar paquetes
+USER root
+
+# Instalar Python y dependencias
 RUN apk add --no-cache \
     python3 \
     py3-pip \
@@ -16,8 +19,8 @@ RUN pip3 install --no-cache-dir \
     lxml \
     pretty_midi
 
-# Crear alias para python3
-RUN ln -s /usr/bin/python3 /usr/bin/python
+# Volver al usuario original (n8n usa 'node')
+USER node
 
 # Verificación final
 RUN python3 -c "import music21; print('music21 installed successfully')"
