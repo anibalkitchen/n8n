@@ -1,13 +1,12 @@
 FROM n8nio/n8n:latest
 
-# Instalar Python y dependencias básicas
-RUN apt-get update && apt-get install -y \
+# Instalar Python y dependencias con apk
+RUN apk add --no-cache \
     python3 \
-    python3-pip \
+    py3-pip \
     libxml2-dev \
-    libxslt1-dev \
-    zlib1g-dev \
-    && rm -rf /var/lib/apt/lists/*
+    libxslt-dev \
+    zlib-dev
 
 # Instalar music21 y dependencias
 RUN pip3 install --no-cache-dir \
